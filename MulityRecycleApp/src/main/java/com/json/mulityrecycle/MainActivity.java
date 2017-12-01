@@ -29,13 +29,13 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements RefreshUtils.RefreshListenser {
 
-
     @Bind(R.id.rv_mainactivity)
     RecyclerView rvMainactivity;
     @Bind(R.id.mrl_mainactivity)
     MaterialRefreshLayout mrfMainactivity;
     @Bind(R.id.activity_main)
     LinearLayout activityMain;
+
     private RefreshUtils refreshUtils;
     private Context mContext;
     private HomepagerRecycleAdapter homepagerRecycleAdapter;
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
 
         initrefresh();
         initdata();
-
     }
 
     private void initdata() {
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
         rvMainactivity.setAdapter(homepagerRecycleAdapter);
         //这里不用自定义的流式布局也是可以的，这里这是根据特定需要简单自定义了一个
         rvMainactivity.setLayoutManager(new MyStaggerGrildLayoutManger(mContext, 2, StaggeredGridLayoutManager.VERTICAL));
-
 
         //头部数据源
         getHeaderData();
@@ -72,10 +70,8 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
         //获取中间部分的数据源
         getCenterBean();
 
-
         //获取底部数据
         getRefreshData();
-
     }
 
     private void getHeaderData() {
@@ -88,13 +84,10 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
                         Headerbean headerbean = new Gson().fromJson(s, Headerbean.class);
 
                         if (headerbean != null) {
-
                             if (headerbean.getData().size() != 0) {
                                 homepagerRecycleAdapter.setheaderbean(headerbean);
-
                             }
                         }
-
                     }
 
                     @Override
@@ -106,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
     }
 
     private void getcategoryData() {
-
         ArrayList<HomeCategory> homeCategories = new ArrayList<>();
         HomeCategory c1 = new HomeCategory(R.mipmap.icon_cart, "购物车");
         HomeCategory c2 = new HomeCategory(R.mipmap.icon_discover, "发现");
@@ -198,8 +190,6 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
         flagFirst = true;
 
         initdata();//此处是为了模拟，直接用了这一个接口数据源
-
-
 
 
     }

@@ -162,8 +162,6 @@ public class RefreshUtils {
             if (this.mRefreshLayout == null)
                 throw new RuntimeException("MaterialRefreshLayout can't be  null");
         }
-
-
     }
 
     public interface RefreshListenser {
