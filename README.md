@@ -1,5 +1,5 @@
-![image](https://github.com/ziranzhiqiu/HomeMultiTypeRecycleview/blob/master/MulityRecycleApp/src/main/res/mipmap-xxxhdpi/20170209103152306.png)
-![image](https://github.com/ziranzhiqiu/HomeMultiTypeRecycleview/blob/master/MulityRecycleApp/src/main/res/mipmap-xxxhdpi/20170210111933002.png)
+![image](https://github.com/ziranzhiqiu/HomeMultiTypeRecycleview/blob/master/MulityRecycleApp/src/main/res/mipmap-xxxhdpi/a20170209103152306.png)
+![image](https://github.com/ziranzhiqiu/HomeMultiTypeRecycleview/blob/master/MulityRecycleApp/src/main/res/mipmap-xxxhdpi/b20170210111933002.png)
 
   @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
