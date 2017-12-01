@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.cjj.MaterialRefreshLayout;
+import com.google.gson.Gson;
 import com.json.mulityrecycle.Constants.Contants;
 import com.json.mulityrecycle.adapter.HomepagerRecycleAdapter;
 import com.json.mulityrecycle.bean.Headerbean;
@@ -16,11 +17,11 @@ import com.json.mulityrecycle.bean.HomeCategory;
 import com.json.mulityrecycle.bean.RefreshBean;
 import com.json.mulityrecycle.utils.RefreshUtils;
 import com.json.mulityrecycle.weidget.MyStaggerGrildLayoutManger;
-import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
     private HomepagerRecycleAdapter homepagerRecycleAdapter;
     private boolean flagFirst = true;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
         initrefresh();
         initdata();
     }
+
+
 
     private void initdata() {
         //初始化recycleview 的适配器 以及布局管理器， 这里的管理器用的是流式布局，至于为何是流式布局，
@@ -176,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
     /**
      * 初始化刷新控件
      */
-    private void initrefresh() {
+   private void initrefresh() {
         //用的是帮助类， 无需关心具体，可以用其他刷新控件
         refreshUtils = new RefreshUtils();
         refreshUtils.newBuilder(mContext).setRefreshLayout(mrfMainactivity)

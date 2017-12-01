@@ -10,15 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.json.mulityrecycle.R;
 import com.json.mulityrecycle.bean.Headerbean;
 import com.json.mulityrecycle.bean.HomeCategory;
 import com.json.mulityrecycle.bean.RefreshBean;
+import com.json.mulityrecycle.utils.GlideImageLoader;
 import com.json.mulityrecycle.weidget.AsHomepageHeaderView;
 import com.json.mulityrecycle.weidget.ImageUtils;
 import com.json.mulityrecycle.weidget.MyStaggerGrildLayoutManger;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +54,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     private LayoutInflater inflater;
     private RecyclerView recyclerView;
     private MyStaggerGrildLayoutManger mystager;
+    private List<Integer> imagesList = new ArrayList<>();
 
     public HomepagerRecycleAdapter(Context context) {
         mContext = context;
@@ -57,14 +63,12 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
         headerData = new ArrayList<>();
         refreshbean = new ArrayList<>();
         centerBean = new ArrayList<>();
-
-
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_TOP) {
-//头部轮播图
+            //头部轮播图
             View viewtop = inflater.inflate(R.layout.adapter_slider, parent, false);
             StaggeredGridLayoutManager.LayoutParams params =
                     (StaggeredGridLayoutManager.LayoutParams) viewtop.getLayoutParams();
@@ -186,6 +190,8 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     }
 
+
+
     @Override
     public int getItemViewType(int position) {
         //此处是根据数据源有无数据来判定分类条的位置；可自行拓展，自由发挥
@@ -203,6 +209,26 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
 
     private void initslider(TypeTopsliderHolder holder, List<Headerbean.DataBean> data) {
+
+        imagesList.add(R.mipmap.ic_launcher);
+        imagesList.add(R.mipmap.ic_launcher);
+        imagesList.add(R.mipmap.ic_launcher);
+        imagesList.add(R.mipmap.ic_launcher);
+        imagesList.add(R.mipmap.ic_launcher);
+
+        holder.mBanner.setImages(imagesList)
+                .setImageLoader(new GlideImageLoader())
+                .setDelayTime(3000)
+                .setIndicatorGravity(BannerConfig.CENTER)
+                .start();
+
+        holder.mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Toast.makeText(mContext, " 点击位置 = " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         LinearLayout linearLayout = holder.linearLayout;
         for (int i = 0; i < data.size(); i++) {
             ImageView imageView = new ImageView(mContext);
@@ -289,6 +315,8 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
         @Bind(R.id.ll_slider)
         LinearLayout linearLayout;
+        @Bind(R.id.home_banner)
+        Banner mBanner;
 
         public TypeTopsliderHolder(View view) {
             super(view);

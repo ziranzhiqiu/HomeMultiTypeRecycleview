@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp">
+    android:orientation="vertical">
 
-    <HorizontalScrollView
-        android:id="@+id/slider"
+    <com.youth.banner.Banner
+        android:id="@+id/home_banner"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="150dp" />
 
-        <LinearLayout
-            android:id="@+id/ll_slider"
+    <android.support.v7.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+        <HorizontalScrollView
+            android:id="@+id/slider"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"></LinearLayout>
+            android:layout_height="200dp">
 
-    </HorizontalScrollView>
-</android.support.v7.widget.CardView>
+            <LinearLayout
+                android:id="@+id/ll_slider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"></LinearLayout>
+
+        </HorizontalScrollView>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

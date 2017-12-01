@@ -4,6 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.json.mulityrecycle.MainActivity">
 
     <com.cjj.MaterialRefreshLayout
@@ -14,9 +15,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_mainactivity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent" />
 
     </com.cjj.MaterialRefreshLayout>
-
-
 </LinearLayout>
