@@ -200,6 +200,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     private void initslider(TypeTopsliderHolder holder, List<Headerbean.DataBean> data) {
 
+        //轮播图
         imagesList.add(R.mipmap.app_log);
         imagesList.add(R.mipmap.app_log);
         imagesList.add(R.mipmap.app_log);
@@ -211,7 +212,6 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
                 .setDelayTime(3000)
                 .setIndicatorGravity(BannerConfig.CENTER)
                 .start();
-
         holder.mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
@@ -219,6 +219,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
             }
         });
 
+        //横向滑动控件展示
         LinearLayout linearLayout = holder.linearLayout;
         for (int i = 0; i < data.size(); i++) {
             ImageView imageView = new ImageView(mContext);

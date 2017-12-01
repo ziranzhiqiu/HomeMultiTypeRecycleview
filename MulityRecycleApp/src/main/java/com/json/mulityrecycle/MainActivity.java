@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 
 import com.cjj.MaterialRefreshLayout;
 import com.google.gson.Gson;
-import com.json.mulityrecycle.Constants.Contants;
 import com.json.mulityrecycle.adapter.HomepagerRecycleAdapter;
 import com.json.mulityrecycle.bean.Headerbean;
 import com.json.mulityrecycle.bean.HomeCategory;

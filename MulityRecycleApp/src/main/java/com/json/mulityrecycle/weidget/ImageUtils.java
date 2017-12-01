@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.json.mulityrecycle.R;
-import com.json.mulityrecycle.app.Myappplication;
+import com.json.mulityrecycle.Myappplication;
 
 
 public class ImageUtils {

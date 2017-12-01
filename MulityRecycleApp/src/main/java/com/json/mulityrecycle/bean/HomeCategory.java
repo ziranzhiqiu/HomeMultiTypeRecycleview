@@ -1,7 +1,7 @@
 package com.json.mulityrecycle.bean;
 
 
-import com.json.mulityrecycle.app.Myappplication;
+import com.json.mulityrecycle.Myappplication;
 
 /**
  * Created by JsonQiu on 2017/11/30.
