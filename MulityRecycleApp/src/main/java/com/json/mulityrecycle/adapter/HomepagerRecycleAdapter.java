@@ -94,8 +94,8 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
             return new TypetypeHolder2(view);
 
         } else if (viewType == TYPE_CATEGORY) {
-//四个快速入口的holder
-//这里的TypetypeHolder和上面的TypetypeHolder2 其实可以写成一个holder，这里为了简单，避免引起复用带来的问题，分开了
+            //四个快速入口的holder
+            //这里的TypetypeHolder和上面的TypetypeHolder2 其实可以写成一个holder，这里为了简单，避免引起复用带来的问题，分开了
             View view = inflater.inflate(R.layout.itam_homepageradapter_rv2, parent, false);
             StaggeredGridLayoutManager.LayoutParams params2 =
                     (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
@@ -162,21 +162,15 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
         TypeHistoryAdapter centerAdapter = new TypeHistoryAdapter(mContext, centerBean);
 
-
         holder.rvtype.setAdapter(centerAdapter);
-
-
     }
 
     private void initcategory(TypetypeHolder holder) {
-
         holder.rvtype.setLayoutManager(new GridLayoutManager(mContext, mHomeCategories.size()));
 
         TypeCategoryAdapter categoryAdapter = new TypeCategoryAdapter(mContext, mHomeCategories);
 
         holder.rvtype.setAdapter(categoryAdapter);
-
-
     }
 
     private void initTop(TypeheadHolder holder, int position) {
@@ -185,12 +179,8 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
         } else if (position == REFRESHPOSITION) {
             holder.hview.setTypeName("下部head");
-
         }
-
     }
-
-
 
     @Override
     public int getItemViewType(int position) {
@@ -210,11 +200,11 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     private void initslider(TypeTopsliderHolder holder, List<Headerbean.DataBean> data) {
 
-        imagesList.add(R.mipmap.ic_launcher);
-        imagesList.add(R.mipmap.ic_launcher);
-        imagesList.add(R.mipmap.ic_launcher);
-        imagesList.add(R.mipmap.ic_launcher);
-        imagesList.add(R.mipmap.ic_launcher);
+        imagesList.add(R.mipmap.app_log);
+        imagesList.add(R.mipmap.app_log);
+        imagesList.add(R.mipmap.app_log);
+        imagesList.add(R.mipmap.app_log);
+        imagesList.add(R.mipmap.app_log);
 
         holder.mBanner.setImages(imagesList)
                 .setImageLoader(new GlideImageLoader())
