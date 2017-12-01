@@ -1,4 +1,4 @@
-package com.json.mulityrecycle.Constants;
+package com.json.mulityrecycle;
 
 
 public class Contants {

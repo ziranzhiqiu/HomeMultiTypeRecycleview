@@ -1,4 +1,4 @@
-package com.json.mulityrecycle.app;
+package com.json.mulityrecycle;
 
 import android.app.Application;
 
