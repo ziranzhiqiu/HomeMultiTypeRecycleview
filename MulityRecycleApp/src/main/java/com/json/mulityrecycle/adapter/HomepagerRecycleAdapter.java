@@ -50,7 +50,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     private int TYPE_TOP = 1;//头部布局
     private int TYPE_CENTER = 2;//
-    private int TYPE_CATEGORY = 3;//中间的四个快速入口
+    private int TYPE_CATEGORY_FourCard = 3;//中间的四个快速入口
     private int TYPE_HEADER = 4;//每个分类的head
     private int REFRESHPOSITION = 5;//下部head的位置
     private int CENTERPOSITION;//中间head的位置
@@ -59,7 +59,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     public HomepagerRecycleAdapter(Context context) {
         mContext = context;
         inflater = LayoutInflater.from(mContext);
-        //初始化各我数据源
+        //初始化各数据源
         headerData = new ArrayList<>();
         refreshbean = new ArrayList<>();
         centerBean = new ArrayList<>();
@@ -96,7 +96,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
             return new TypetypeHolder2(view);
 
         }
-        else if (viewType == TYPE_CATEGORY) {
+        else if (viewType == TYPE_CATEGORY_FourCard) {
             //四个快速入口的holder
             //这里的TypetypeHolder和上面的TypetypeHolder2 其实可以写成一个holder，这里为了简单，避免引起复用带来的问题，分开了
             View view = inflater.inflate(R.layout.itam_homepageradapter_rv2, parent, false);
@@ -204,7 +204,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
         if (position == 0) return TYPE_TOP;
         else if (position == CENTERPOSITION || position == REFRESHPOSITION) return TYPE_HEADER;
-        else if (position == 1) return TYPE_CATEGORY;
+        else if (position == 1) return TYPE_CATEGORY_FourCard;
         else if (position == CENTERPOSITION + 1) return TYPE_CENTER;
         else return TYPE_REFRESH;
     }
@@ -272,8 +272,6 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
                     Glide.with(mContext).resumeRequests();
 
                 }
-
-
             }
 
             @Override

@@ -211,9 +211,5 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
                 }
             }
         }).start();
-
-
     }
-
-
 }
