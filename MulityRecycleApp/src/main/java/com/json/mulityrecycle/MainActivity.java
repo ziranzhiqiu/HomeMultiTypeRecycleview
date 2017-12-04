@@ -143,8 +143,6 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
     }
 
     private void getRefreshData() {
-
-
         OkGo.get(Contants.API.CAMPAIGN_HOME)
                 .execute(new StringCallback() {
                     @Override
@@ -171,13 +169,10 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
                         refreshUtils.finishrefresh();
                     }
                 });
-
     }
 
 
-    /**
-     * 初始化刷新控件
-     */
+    // 初始化刷新控件
    private void initrefresh() {
         //用的是帮助类， 无需关心具体，可以用其他刷新控件
         refreshUtils = new RefreshUtils();
@@ -192,8 +187,6 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
         flagFirst = true;
 
         initdata();//此处是为了模拟，直接用了这一个接口数据源
-
-
     }
 
     @Override
