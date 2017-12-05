@@ -18,15 +18,11 @@ public class RefreshUtils {
     private RefreshListenser mRefreshListenser;
 
     public RefreshUtils() {
-
     }
-
     public Builder newBuilder(Context context) {
-
         builder = new Builder(context);
         return builder;
     }
-
 
     private void initRefreshLayout() {
         builder.mRefreshLayout.setLoadMore(builder.canLoadMore);
@@ -42,7 +38,6 @@ public class RefreshUtils {
                     mRefreshListenser.refreshdata();
                 }
             }
-
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
 
@@ -50,14 +45,12 @@ public class RefreshUtils {
 
                     mRefreshListenser.loadrefreshdata();
                 }
-
             }
         });
     }
 
     //结束刷新
     public void finishrefresh() {
-
         builder.mRefreshLayout.finishRefresh();
         builder.mRefreshLayout.finishRefreshLoadMore();
     }
@@ -74,7 +67,6 @@ public class RefreshUtils {
                         public void run() {
                             //结束刷新
                             finishrefresh();
-
                         }
                     });
                 } catch (InterruptedException e) {
@@ -85,23 +77,15 @@ public class RefreshUtils {
                         public void run() {
                             //结束刷新
                             finishrefresh();
-
                         }
                     });
                 }
             }
         }).start();
-
     }
 
-    /**
-     *
-     */
     public class Builder {
-
-
         private Context mContext;
-
 
         private MaterialRefreshLayout mRefreshLayout;
 
@@ -111,7 +95,6 @@ public class RefreshUtils {
         public boolean isOverLay = true;//是否入侵
 
         public boolean isWaveShow = false;
-
 
         public Builder(Context context) {
             mContext = context;
@@ -127,37 +110,30 @@ public class RefreshUtils {
             return builder;
         }
 
-
         public Builder setLoadMore(boolean loadMore) {
             this.canLoadMore = loadMore;
             return builder;
 
         }
 
-
         public Builder setRefreshLayout(MaterialRefreshLayout refreshLayout) {
-
             this.mRefreshLayout = refreshLayout;
             return builder;
         }
 
 
         public void build(RefreshListenser listener) {
-
             mRefreshListenser = listener;
-            valid();
+
+            valid();  //异常情况
 
             initRefreshLayout();
-
         }
 
         //异常情况
         private void valid() {
-
-
             if (this.mContext == null)
                 throw new RuntimeException("content can't be null");
-
 
             if (this.mRefreshLayout == null)
                 throw new RuntimeException("MaterialRefreshLayout can't be  null");
@@ -168,7 +144,5 @@ public class RefreshUtils {
         void refreshdata();
 
         void loadrefreshdata();
-
     }
-
 }
