@@ -18,8 +18,8 @@ import com.json.mulityrecycle.bean.Headerbean;
 import com.json.mulityrecycle.bean.HomeCategory;
 import com.json.mulityrecycle.bean.WaterFallBean;
 import com.json.mulityrecycle.utils.GlideImageLoader;
-import com.json.mulityrecycle.weidget.MyHeaderTitleView;
 import com.json.mulityrecycle.weidget.ImageUtils;
+import com.json.mulityrecycle.weidget.MyHeaderTitleView;
 import com.json.mulityrecycle.weidget.MyStaggerGrildLayoutManger;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -68,11 +68,12 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     }
 
 
+    //抽取出来的方法
     private View getTypeViewHolder(ViewGroup parent, int layoutId) {
         View viewtop = inflater.inflate(layoutId, parent, false);
-        StaggeredGridLayoutManager.LayoutParams params =
-                (StaggeredGridLayoutManager.LayoutParams) viewtop.getLayoutParams();
-        params.setFullSpan(true);//最为重要的一个方法，占满全屏,以下同理
+        StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) viewtop.getLayoutParams();
+        //最为重要的一个方法，占满全屏,以下同理
+        params.setFullSpan(true);
         viewtop.setLayoutParams(params);
         return viewtop;
     }
@@ -87,7 +88,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
             return new Type3CenterHolder(getTypeViewHolder(parent, R.layout.type_3_center));
         } else if (viewType == TYPE_CATEGORY_FourCard) {
             //四个快速入口的holder
-            //这里的TypetypeHolder和上面的TypetypeHolder2 其实可以写成一个holder，这里为了简单，避免引起复用带来的问题，分开了
+            //这里的TypetypeHolder和上面的Type3CenterHolder 其实可以写成一个holder，这里为了简单，避免引起复用带来的问题，分开了
             return new Type4CategoryHolder(getTypeViewHolder(parent, R.layout.type_3_center));
         } else if (viewType == TYPE_WATERFALL) {
             return new Type5Waterfall(inflater.inflate(R.layout.type_5_waterfall, parent, false));
@@ -99,7 +100,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof Type1TopHolder && headerData.size() != 0 && ((Type1TopHolder) holder).linearLayout.getChildCount() == 0) {
-            //如果是TypeTopsliderHolder， 并且header有数据，并且TypeTopsliderHolder的linearLayout没有子view
+            //如果是Type1TopHolder， 并且header有数据，并且Type1TopHolder的linearLayout没有子view
             // （因为这个布局只出现一次，如果他没有子view， 也就是他是第一次加载，才加载数据）
             //加载头部数据源
             init1TopSlider(((Type1TopHolder) holder), headerData);

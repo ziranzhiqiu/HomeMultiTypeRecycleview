@@ -45,7 +45,7 @@ public class MyPicTextView extends RelativeLayout implements View.OnClickListene
 
     public MyPicTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        View.inflate(context, R.layout.asimagetextview, this);
+        View.inflate(context, R.layout.pic_tv_iew, this);
         ivImagetext = ((ImageView) findViewById(R.id.iv_imagetext));
         tvImagetext = ((TextView) findViewById(R.id.tv_imagetext));
         initattrs();

@@ -36,7 +36,7 @@ public class TypeCategoryAdapter extends RecyclerView.Adapter<TypeCategoryAdapte
 
     @Override
     public TypetypeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TypetypeHolder(inflater.inflate(R.layout.item_homepageradapter_ivtv, null));
+        return new TypetypeHolder(inflater.inflate(R.layout.item_home_ivtv, null));
     }
 
     @Override

@@ -47,7 +47,7 @@ public class MyHeaderTitleView extends RelativeLayout implements View.OnClickLis
     }
 
     private void initviews(Context context) {
-        View.inflate(context, R.layout.ashomepagerheaderview, this);
+        View.inflate(context, R.layout.home_header_title_view, this);
         iv_left = ((TextView) findViewById(R.id.iv_ashomeitem_left));
         iv_more = ((ImageView) findViewById(R.id.iv_ashomepagerheader_more));
         tv_more = ((TextView) findViewById(R.id.tv_ashomepagerheader_more));
