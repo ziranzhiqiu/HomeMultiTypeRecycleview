@@ -53,9 +53,10 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     private int TYPE_CENTER = 2;//
     private int TYPE_CATEGORY_FourCard = 3;//中间的四个快速入口
     private int TYPE_HEADER = 4;//每个分类的head
-    private int REFRESH_POSITION = 5;//下部head的位置
-    private int CENTER_POSITION = 6;//中间head的位置
-    private int TYPE_WATERFALL = 7;//最下面的布局
+    private int TYPE_WATERFALL = 5;//最下面的布局
+
+    private int WATERFALL_POSITION = 6;//下部head的位置
+    private int CENTER_POSITION = 7;//中间head的位置
 
     public HomepagerRecycleAdapter(Context context) {
         mContext = context;
@@ -89,7 +90,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
             //这里的TypetypeHolder和上面的TypetypeHolder2 其实可以写成一个holder，这里为了简单，避免引起复用带来的问题，分开了
             return new Type4CategoryHolder(getTypeViewHolder(parent, R.layout.type_3_center));
         } else if (viewType == TYPE_WATERFALL) {
-            return new Type5Waterfall(inflater.inflate(R.layout.item_raiders2, parent, false));
+            return new Type5Waterfall(inflater.inflate(R.layout.type_5_waterfall, parent, false));
         } else {
             return new Type1TopHolder(getTypeViewHolder(parent, R.layout.type_1_top_slider));
         }
@@ -113,7 +114,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
             init4Category(((Type4CategoryHolder) holder));
         } else if (holder instanceof Type5Waterfall && refreshbean.size() != 0) {
             //加载瀑布流数据源  waterfall
-            init5WaterFall(((Type5Waterfall) holder), position - REFRESH_POSITION - 1);
+            init5WaterFall(((Type5Waterfall) holder), position - WATERFALL_POSITION - 1);
         }
     }
 
@@ -159,7 +160,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
         if (position == CENTER_POSITION) {
             holder.myHeaderTitleView.setTypeName("中间head");
 
-        } else if (position == REFRESH_POSITION) {
+        } else if (position == WATERFALL_POSITION) {
             holder.myHeaderTitleView.setTypeName("下部head");
         }
     }
@@ -202,12 +203,12 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         //此处是根据数据源有无数据来判定分类条的位置；可自行拓展，自由发挥
         CENTER_POSITION = mHomeCategories.size() == 0 ? 1 : 2;
-        REFRESH_POSITION = centerBean.size() == 0 ? 3 : 4;
+        WATERFALL_POSITION = centerBean.size() == 0 ? 3 : 4;
 
-        Log.e("getItemViewType", "getItemViewType: " + CENTER_POSITION + ",:" + REFRESH_POSITION);
+        Log.e("getItemViewType", "getItemViewType: " + CENTER_POSITION + ",:" + WATERFALL_POSITION);
 
         if (position == 0) return TYPE_TOP;
-        else if (position == CENTER_POSITION || position == REFRESH_POSITION) return TYPE_HEADER;
+        else if (position == CENTER_POSITION || position == WATERFALL_POSITION) return TYPE_HEADER;
         else if (position == 1) return TYPE_CATEGORY_FourCard;
         else if (position == CENTER_POSITION + 1) return TYPE_CENTER;
         else return TYPE_WATERFALL;
