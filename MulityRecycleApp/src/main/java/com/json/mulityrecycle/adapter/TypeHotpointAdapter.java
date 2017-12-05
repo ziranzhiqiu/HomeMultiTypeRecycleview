@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.json.mulityrecycle.R;
-import com.json.mulityrecycle.bean.RefreshBean;
+import com.json.mulityrecycle.bean.WaterFallBean;
 import com.json.mulityrecycle.weidget.ImageUtils;
 
 import java.util.List;
@@ -21,16 +21,16 @@ import butterknife.ButterKnife;
  * Created by JsonQiu on 2017/11/30.
  * 首页热议
  */
-public class TypeHistoryAdapter extends RecyclerView.Adapter<TypeHistoryAdapter.TypeHistoryHolder> {
+public class TypeHotpointAdapter extends RecyclerView.Adapter<TypeHotpointAdapter.TypeHistoryHolder> {
 
     private Context mContext;
 
-    private List<RefreshBean.DataBean> mHomehopspot;
+    private List<WaterFallBean.DataBean> mHomehopspot;
 
     private LayoutInflater inflater;
 
 
-    public TypeHistoryAdapter(Context mContext, List<RefreshBean.DataBean> mHomeCategory) {
+    public TypeHotpointAdapter(Context mContext, List<WaterFallBean.DataBean> mHomeCategory) {
         this.mContext = mContext;
         this.mHomehopspot = mHomeCategory;
         inflater = LayoutInflater.from(mContext);
@@ -43,7 +43,7 @@ public class TypeHistoryAdapter extends RecyclerView.Adapter<TypeHistoryAdapter.
 
     @Override
     public void onBindViewHolder(TypeHistoryHolder holder, int position) {
-        RefreshBean.DataBean contentBean = mHomehopspot.get(position);
+        WaterFallBean.DataBean contentBean = mHomehopspot.get(position);
         ImageUtils.load(mContext, contentBean.getCpThree().getImgUrl(), holder.homeReadPivIv);
         holder.homeReadTitle.setText("#" + contentBean.getTitle());
     }

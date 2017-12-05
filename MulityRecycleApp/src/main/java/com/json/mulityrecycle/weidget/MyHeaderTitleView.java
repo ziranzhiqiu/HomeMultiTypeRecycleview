@@ -17,7 +17,7 @@ import com.json.mulityrecycle.R;
  * 自定义view，首页item头部
  */
 
-public class AsHomepageHeaderView extends RelativeLayout implements View.OnClickListener {
+public class MyHeaderTitleView extends RelativeLayout implements View.OnClickListener {
 
 
     private ImageView iv_more;
@@ -31,15 +31,15 @@ public class AsHomepageHeaderView extends RelativeLayout implements View.OnClick
     private boolean isrightivtvvisible;
 
 
-    public AsHomepageHeaderView(Context context) {
+    public MyHeaderTitleView(Context context) {
         this(context, null);
     }
 
-    public AsHomepageHeaderView(Context context, AttributeSet attrs) {
+    public MyHeaderTitleView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AsHomepageHeaderView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyHeaderTitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initviews(context);
         initAttrs(attrs);
@@ -68,10 +68,7 @@ public class AsHomepageHeaderView extends RelativeLayout implements View.OnClick
 
         }
 
-//初始化textview的值，到时候需要动态设置
-
-
-
+        //初始化textview的值，到时候需要动态设置
         if (typeName != null) {
             tv_type.setText(typeName + "");
         }
@@ -83,10 +80,7 @@ public class AsHomepageHeaderView extends RelativeLayout implements View.OnClick
 
     //对外提供给tv_type设置内容的方法
     public void setTypeName(String typename) {
-
         tv_type.setText(typename + "");
-
-
     }
 
 

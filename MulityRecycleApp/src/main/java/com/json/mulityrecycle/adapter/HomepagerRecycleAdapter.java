@@ -1,7 +1,6 @@
 package com.json.mulityrecycle.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -17,9 +16,9 @@ import com.bumptech.glide.Glide;
 import com.json.mulityrecycle.R;
 import com.json.mulityrecycle.bean.Headerbean;
 import com.json.mulityrecycle.bean.HomeCategory;
-import com.json.mulityrecycle.bean.RefreshBean;
+import com.json.mulityrecycle.bean.WaterFallBean;
 import com.json.mulityrecycle.utils.GlideImageLoader;
-import com.json.mulityrecycle.weidget.AsHomepageHeaderView;
+import com.json.mulityrecycle.weidget.MyHeaderTitleView;
 import com.json.mulityrecycle.weidget.ImageUtils;
 import com.json.mulityrecycle.weidget.MyStaggerGrildLayoutManger;
 import com.youth.banner.Banner;
@@ -38,24 +37,25 @@ import butterknife.ButterKnife;
 public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     private final Context mContext;
-    private List<Headerbean.DataBean> headerData;
-    private int count = 3;
-    private List<RefreshBean.DataBean> refreshbean;
-    private List<RefreshBean.DataBean> centerBean;
-    private ArrayList<HomeCategory> mHomeCategories;
-    private List<Integer> mHeights = new ArrayList<>();
     private LayoutInflater inflater;
     private RecyclerView recyclerView;
     private MyStaggerGrildLayoutManger mystager;
+    private List<Headerbean.DataBean> headerData;
+    private List<WaterFallBean.DataBean> refreshbean;
+    private List<WaterFallBean.DataBean> centerBean;
+    private ArrayList<HomeCategory> mHomeCategories;
+    private List<Integer> mHeights = new ArrayList<>();
     private List<Integer> imagesList = new ArrayList<>();
+
+    private int count = 3;
 
     private int TYPE_TOP = 1;//头部布局
     private int TYPE_CENTER = 2;//
     private int TYPE_CATEGORY_FourCard = 3;//中间的四个快速入口
     private int TYPE_HEADER = 4;//每个分类的head
-    private int REFRESHPOSITION = 5;//下部head的位置
-    private int CENTERPOSITION;//中间head的位置
-    private int TYPE_REFRESH = 6;//最下面的布局
+    private int REFRESH_POSITION = 5;//下部head的位置
+    private int CENTER_POSITION = 6;//中间head的位置
+    private int TYPE_REFRESH = 7;//最下面的布局
 
     public HomepagerRecycleAdapter(Context context) {
         mContext = context;
@@ -66,7 +66,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
         centerBean = new ArrayList<>();
     }
 
-    @NonNull
+
     private View getTypeViewHolder(ViewGroup parent, int layoutId) {
         View viewtop = inflater.inflate(layoutId, parent, false);
         StaggeredGridLayoutManager.LayoutParams params =
@@ -79,56 +79,47 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_TOP) {
-            return new TypeTopsliderHolder(getTypeViewHolder(parent,R.layout.adapter_slider));
-        }
-        else if (viewType == TYPE_HEADER) {
-            return new TypeheadHolder(getTypeViewHolder(parent,R.layout.item_homepagertypeheader_type));
-        }
-        else if (viewType == TYPE_CENTER) {
-            return new TypetypeHolder2(getTypeViewHolder(parent,R.layout.itam_homepageradapter_rv2));
+            return new Type1TopHolder(getTypeViewHolder(parent, R.layout.adapter_slider));
+        } else if (viewType == TYPE_HEADER) {
+            return new Type2HeadHolder(getTypeViewHolder(parent, R.layout.item_homepagertypeheader_type));
+        } else if (viewType == TYPE_CENTER) {
+            return new Type3CenterHolder(getTypeViewHolder(parent, R.layout.itam_homepageradapter_rv2));
 
-        }
-        else if (viewType == TYPE_CATEGORY_FourCard) {
+        } else if (viewType == TYPE_CATEGORY_FourCard) {
             //四个快速入口的holder
             //这里的TypetypeHolder和上面的TypetypeHolder2 其实可以写成一个holder，这里为了简单，避免引起复用带来的问题，分开了
-            return new TypetypeHolder(getTypeViewHolder(parent,R.layout.itam_homepageradapter_rv2));
-        }
-        else if (viewType == TYPE_REFRESH) {
-            return new TypeRefresh(inflater.inflate(R.layout.item_raiders2, parent, false));
-        }
-        else {
-            return new TypeTopsliderHolder(getTypeViewHolder(parent,R.layout.adapter_slider));
+            return new Type4CategoryHolder(getTypeViewHolder(parent, R.layout.itam_homepageradapter_rv2));
+        } else if (viewType == TYPE_REFRESH) {
+            return new Type5Waterfall(inflater.inflate(R.layout.item_raiders2, parent, false));
+        } else {
+            return new Type1TopHolder(getTypeViewHolder(parent, R.layout.adapter_slider));
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof TypeTopsliderHolder && headerData.size() != 0 && ((TypeTopsliderHolder) holder).linearLayout.getChildCount() == 0) {
+        if (holder instanceof Type1TopHolder && headerData.size() != 0 && ((Type1TopHolder) holder).linearLayout.getChildCount() == 0) {
             //如果是TypeTopsliderHolder， 并且header有数据，并且TypeTopsliderHolder的linearLayout没有子view
             // （因为这个布局只出现一次，如果他没有子view， 也就是他是第一次加载，才加载数据）
             //加载头部数据源
-            initSlider(((TypeTopsliderHolder) holder), headerData);
-        }
-        else if (holder instanceof TypetypeHolder && centerBean.size() != 0) {
-            //加载四个category数据源
-            initCategory(((TypetypeHolder) holder));
-        }
-        else if (holder instanceof TypeheadHolder) {
+            init1TopSlider(((Type1TopHolder) holder), headerData);
+        } else if (holder instanceof Type2HeadHolder) {
             //加载heade数据源（其实这里可以每个head单独设置，因为有的需求head去各式各样）
-            initTop(((TypeheadHolder) holder), position);
-        }
-        else if (holder instanceof TypetypeHolder2 && centerBean.size() != 0) {
+            init2Head(((Type2HeadHolder) holder), position);
+        } else if (holder instanceof Type3CenterHolder && centerBean.size() != 0) {
             //加载中间head下面的数据源
-            initCenterBean(((TypetypeHolder2) holder));
-        }
-        else if (holder instanceof TypeRefresh && refreshbean.size() != 0) {
+            init3CenterBean(((Type3CenterHolder) holder));
+        } else if (holder instanceof Type4CategoryHolder && centerBean.size() != 0) {
+            //加载四个category数据源
+            init4Category(((Type4CategoryHolder) holder));
+        } else if (holder instanceof Type5Waterfall && refreshbean.size() != 0) {
             //加载瀑布流数据源  waterfall
-            initWaterFall(((TypeRefresh) holder), position - REFRESHPOSITION - 1);
+            init5WaterFall(((Type5Waterfall) holder), position - REFRESH_POSITION - 1);
         }
     }
 
-    private void initWaterFall(TypeRefresh holder, int position) {
-        Log.e("position", "initWaterFall: " + position);
+    private void init5WaterFall(Type5Waterfall holder, int position) {
+        Log.e("position", "init5WaterFall: " + position);
         if (mHeights.size() <= getItemCount() + 2) {
             //这里只是随机数模拟瀑布流， 实际过程中， 应该根据图片高度来实现瀑布流
             mHeights.add((int) (500 + Math.random() * 400));
@@ -149,15 +140,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private void initCenterBean(TypetypeHolder2 holder) {
-        holder.rvtype.setLayoutManager(new GridLayoutManager(mContext, 2));
-
-        TypeHistoryAdapter centerAdapter = new TypeHistoryAdapter(mContext, centerBean);
-
-        holder.rvtype.setAdapter(centerAdapter);
-    }
-
-    private void initCategory(TypetypeHolder holder) {
+    private void init4Category(Type4CategoryHolder holder) {
         holder.rvtype.setLayoutManager(new GridLayoutManager(mContext, mHomeCategories.size()));
 
         TypeCategoryAdapter categoryAdapter = new TypeCategoryAdapter(mContext, mHomeCategories);
@@ -165,32 +148,24 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
         holder.rvtype.setAdapter(categoryAdapter);
     }
 
-    private void initTop(TypeheadHolder holder, int position) {
-        if (position == CENTERPOSITION) {
+    private void init3CenterBean(Type3CenterHolder holder) {
+        holder.rvtype.setLayoutManager(new GridLayoutManager(mContext, 2));
+
+        TypeHotpointAdapter centerAdapter = new TypeHotpointAdapter(mContext, centerBean);
+
+        holder.rvtype.setAdapter(centerAdapter);
+    }
+
+    private void init2Head(Type2HeadHolder holder, int position) {
+        if (position == CENTER_POSITION) {
             holder.hview.setTypeName("中间head");
 
-        } else if (position == REFRESHPOSITION) {
+        } else if (position == REFRESH_POSITION) {
             holder.hview.setTypeName("下部head");
         }
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        //此处是根据数据源有无数据来判定分类条的位置；可自行拓展，自由发挥
-        CENTERPOSITION = mHomeCategories.size() == 0 ? 1 : 2;
-        REFRESHPOSITION = centerBean.size() == 0 ? 3 : 4;
-
-        Log.e("getItemViewType", "getItemViewType: " + CENTERPOSITION + ",:" + REFRESHPOSITION);
-
-        if (position == 0) return TYPE_TOP;
-        else if (position == CENTERPOSITION || position == REFRESHPOSITION) return TYPE_HEADER;
-        else if (position == 1) return TYPE_CATEGORY_FourCard;
-        else if (position == CENTERPOSITION + 1) return TYPE_CENTER;
-        else return TYPE_REFRESH;
-    }
-
-
-    private void initSlider(TypeTopsliderHolder holder, List<Headerbean.DataBean> data) {
+    private void init1TopSlider(Type1TopHolder holder, List<Headerbean.DataBean> data) {
         //轮播图
         imagesList.add(R.mipmap.app_log);
         imagesList.add(R.mipmap.ic_launcher);
@@ -222,6 +197,21 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             linearLayout.addView(imageView);
         }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        //此处是根据数据源有无数据来判定分类条的位置；可自行拓展，自由发挥
+        CENTER_POSITION = mHomeCategories.size() == 0 ? 1 : 2;
+        REFRESH_POSITION = centerBean.size() == 0 ? 3 : 4;
+
+        Log.e("getItemViewType", "getItemViewType: " + CENTER_POSITION + ",:" + REFRESH_POSITION);
+
+        if (position == 0) return TYPE_TOP;
+        else if (position == CENTER_POSITION || position == REFRESH_POSITION) return TYPE_HEADER;
+        else if (position == 1) return TYPE_CATEGORY_FourCard;
+        else if (position == CENTER_POSITION + 1) return TYPE_CENTER;
+        else return TYPE_REFRESH;
     }
 
     @Override
@@ -265,10 +255,10 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setRefreshBean(RefreshBean refreshBean, boolean flagFirst) {
-        refreshbean.addAll(refreshBean.getData());
+    public void setRefreshBean(WaterFallBean waterFallBean, boolean flagFirst) {
+        refreshbean.addAll(waterFallBean.getData());
         int count1 = this.count;
-        this.count += refreshBean.getData().size();
+        this.count += waterFallBean.getData().size();
         notifyDataSetChanged();
         if (!flagFirst) {
             recyclerView.smoothScrollToPosition(count1 + 2);//加载完以后向上滚动3个条目
@@ -277,8 +267,8 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     }
 
-    public void setCenterBean(RefreshBean refreshBean) {
-        centerBean = refreshBean.getData();
+    public void setCenterBean(WaterFallBean waterFallBean) {
+        centerBean = waterFallBean.getData();
         count++;
         notifyDataSetChanged();
     }
@@ -291,26 +281,26 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     }
 
     //头部Viewpager viewholder
-    public class TypeTopsliderHolder extends RecyclerView.ViewHolder {
+    public class Type1TopHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.ll_slider)
         LinearLayout linearLayout;
         @Bind(R.id.home_banner)
         Banner mBanner;
 
-        public TypeTopsliderHolder(View view) {
+        public Type1TopHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
 
-    public class TypeheadHolder extends RecyclerView.ViewHolder {
+    public class Type2HeadHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.ashv_homepager)
-        AsHomepageHeaderView hview;
+        MyHeaderTitleView hview;
 
-        public TypeheadHolder(View view) {
+        public Type2HeadHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            hview.setMoreclicklistenser(new AsHomepageHeaderView.MoreclickListenser() {
+            hview.setMoreclicklistenser(new MyHeaderTitleView.MoreclickListenser() {
                 @Override
                 public void setmoreclicklistenser() {
                 }
@@ -319,31 +309,33 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     }
 
     //中间的四个type
-    public class TypetypeHolder extends RecyclerView.ViewHolder {
+    public class Type4CategoryHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.rv_homepageradapter_artist)
         RecyclerView rvtype;
-        public TypetypeHolder(View view) {
+
+        public Type4CategoryHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
 
-    public class TypetypeHolder2 extends RecyclerView.ViewHolder {
+    public class Type3CenterHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.rv_homepageradapter_artist)
         RecyclerView rvtype;
 
 
-        public TypetypeHolder2(View view) {
+        public Type3CenterHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
 
 
-    static class TypeRefresh extends RecyclerView.ViewHolder {
+    static class Type5Waterfall extends RecyclerView.ViewHolder {
         @Bind(R.id.home_read_piv_iv)
         ImageView homeReadPivIv;
-        TypeRefresh(View view) {
+
+        Type5Waterfall(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

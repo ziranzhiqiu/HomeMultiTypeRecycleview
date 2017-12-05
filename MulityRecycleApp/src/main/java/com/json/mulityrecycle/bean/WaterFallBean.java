@@ -2,11 +2,7 @@ package com.json.mulityrecycle.bean;
 
 import java.util.List;
 
-/**
- * Created by 丁瑞 on 2017/2/2.
- */
-
-public class RefreshBean {
+public class WaterFallBean {
 
 
     private List<DataBean> data;

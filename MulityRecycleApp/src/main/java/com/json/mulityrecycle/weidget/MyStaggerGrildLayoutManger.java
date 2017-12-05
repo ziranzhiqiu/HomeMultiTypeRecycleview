@@ -11,10 +11,7 @@ import android.util.DisplayMetrics;
  * Created by JsonQiu on 2017/11/29.
  * 用于改变recycleview加载更多结束以后向上滑动一段距离是，平滑， 可以控制时间
  */
-
 public class MyStaggerGrildLayoutManger extends StaggeredGridLayoutManager {
-
-
     private float MILLISECONDS_PER_INCH = 1f;
     private Context contxt;
 
@@ -56,6 +53,4 @@ public class MyStaggerGrildLayoutManger extends StaggeredGridLayoutManager {
     public void setSpeedFast() {
         MILLISECONDS_PER_INCH = contxt.getResources().getDisplayMetrics().density * 0.03f;
     }
-
-
 }

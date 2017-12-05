@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * Created by JsonQiu on 2017/11/30.
  */
-
 public class Headerbean {
 
     @Override

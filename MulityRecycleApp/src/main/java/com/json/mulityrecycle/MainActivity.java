@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.json.mulityrecycle.adapter.HomepagerRecycleAdapter;
 import com.json.mulityrecycle.bean.Headerbean;
 import com.json.mulityrecycle.bean.HomeCategory;
-import com.json.mulityrecycle.bean.RefreshBean;
+import com.json.mulityrecycle.bean.WaterFallBean;
 import com.json.mulityrecycle.utils.RefreshUtils;
 import com.json.mulityrecycle.weidget.MyStaggerGrildLayoutManger;
 import com.lzy.okgo.OkGo;
@@ -120,10 +120,10 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         s = "{" + "\"data\":" + s + "}";
-                        RefreshBean refreshBean = new Gson().fromJson(s, RefreshBean.class);
-                        if (refreshBean != null) {
-                            if (refreshBean.getData().size() != 0) {
-                                homepagerRecycleAdapter.setCenterBean(refreshBean);
+                        WaterFallBean waterFallBean = new Gson().fromJson(s, WaterFallBean.class);
+                        if (waterFallBean != null) {
+                            if (waterFallBean.getData().size() != 0) {
+                                homepagerRecycleAdapter.setCenterBean(waterFallBean);
                                 refreshUtils.finishrefreshSleep();
 
                             }
@@ -148,10 +148,10 @@ public class MainActivity extends AppCompatActivity implements RefreshUtils.Refr
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         s = "{" + "\"data\":" + s + "}";
-                        RefreshBean refreshBean = new Gson().fromJson(s, RefreshBean.class);
-                        if (refreshBean != null) {
-                            if (refreshBean.getData().size() != 0) {
-                                homepagerRecycleAdapter.setRefreshBean(refreshBean, flagFirst);
+                        WaterFallBean waterFallBean = new Gson().fromJson(s, WaterFallBean.class);
+                        if (waterFallBean != null) {
+                            if (waterFallBean.getData().size() != 0) {
+                                homepagerRecycleAdapter.setRefreshBean(waterFallBean, flagFirst);
                                 if (flagFirst) {
                                     refreshUtils.finishrefreshSleep();
                                     flagFirst = false;
