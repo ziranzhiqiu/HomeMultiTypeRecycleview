@@ -15,7 +15,7 @@ import com.json.mulityrecycle.R;
  * Created by JsonQiu on 2017/12/01.
  */
 
-public class AsImageTextView extends RelativeLayout implements View.OnClickListener {
+public class MyPicTextView extends RelativeLayout implements View.OnClickListener {
     private ImageView ivImagetext;
     private TextView tvImagetext;
 
@@ -35,15 +35,15 @@ public class AsImageTextView extends RelativeLayout implements View.OnClickListe
         this.tvImagetext = tvImagetext;
     }
 
-    public AsImageTextView(Context context) {
+    public MyPicTextView(Context context) {
         this(context, null);
     }
 
-    public AsImageTextView(Context context, AttributeSet attrs) {
+    public MyPicTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AsImageTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyPicTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View.inflate(context, R.layout.asimagetextview, this);
         ivImagetext = ((ImageView) findViewById(R.id.iv_imagetext));

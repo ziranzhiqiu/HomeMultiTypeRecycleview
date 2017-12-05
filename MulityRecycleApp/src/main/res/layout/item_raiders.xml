@@ -28,7 +28,7 @@
             android:layout_marginRight="15dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="从你的世界路过"
+            android:text="JsonQIu"
             android:textSize="16sp"
 
             android:visibility="gone" />

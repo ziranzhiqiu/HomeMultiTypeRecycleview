@@ -55,7 +55,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     private int TYPE_HEADER = 4;//每个分类的head
     private int REFRESH_POSITION = 5;//下部head的位置
     private int CENTER_POSITION = 6;//中间head的位置
-    private int TYPE_REFRESH = 7;//最下面的布局
+    private int TYPE_WATERFALL = 7;//最下面的布局
 
     public HomepagerRecycleAdapter(Context context) {
         mContext = context;
@@ -79,20 +79,19 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_TOP) {
-            return new Type1TopHolder(getTypeViewHolder(parent, R.layout.adapter_slider));
+            return new Type1TopHolder(getTypeViewHolder(parent, R.layout.type_1_top_slider));
         } else if (viewType == TYPE_HEADER) {
-            return new Type2HeadHolder(getTypeViewHolder(parent, R.layout.item_homepagertypeheader_type));
+            return new Type2HeadHolder(getTypeViewHolder(parent, R.layout.type_2_head_item));
         } else if (viewType == TYPE_CENTER) {
-            return new Type3CenterHolder(getTypeViewHolder(parent, R.layout.itam_homepageradapter_rv2));
-
+            return new Type3CenterHolder(getTypeViewHolder(parent, R.layout.type_3_center));
         } else if (viewType == TYPE_CATEGORY_FourCard) {
             //四个快速入口的holder
             //这里的TypetypeHolder和上面的TypetypeHolder2 其实可以写成一个holder，这里为了简单，避免引起复用带来的问题，分开了
-            return new Type4CategoryHolder(getTypeViewHolder(parent, R.layout.itam_homepageradapter_rv2));
-        } else if (viewType == TYPE_REFRESH) {
+            return new Type4CategoryHolder(getTypeViewHolder(parent, R.layout.type_3_center));
+        } else if (viewType == TYPE_WATERFALL) {
             return new Type5Waterfall(inflater.inflate(R.layout.item_raiders2, parent, false));
         } else {
-            return new Type1TopHolder(getTypeViewHolder(parent, R.layout.adapter_slider));
+            return new Type1TopHolder(getTypeViewHolder(parent, R.layout.type_1_top_slider));
         }
     }
 
@@ -158,10 +157,10 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     private void init2Head(Type2HeadHolder holder, int position) {
         if (position == CENTER_POSITION) {
-            holder.hview.setTypeName("中间head");
+            holder.myHeaderTitleView.setTypeName("中间head");
 
         } else if (position == REFRESH_POSITION) {
-            holder.hview.setTypeName("下部head");
+            holder.myHeaderTitleView.setTypeName("下部head");
         }
     }
 
@@ -211,7 +210,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
         else if (position == CENTER_POSITION || position == REFRESH_POSITION) return TYPE_HEADER;
         else if (position == 1) return TYPE_CATEGORY_FourCard;
         else if (position == CENTER_POSITION + 1) return TYPE_CENTER;
-        else return TYPE_REFRESH;
+        else return TYPE_WATERFALL;
     }
 
     @Override
@@ -295,12 +294,12 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     public class Type2HeadHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.ashv_homepager)
-        MyHeaderTitleView hview;
+        MyHeaderTitleView myHeaderTitleView;
 
         public Type2HeadHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            hview.setMoreclicklistenser(new MyHeaderTitleView.MoreclickListenser() {
+            myHeaderTitleView.setMoreclicklistenser(new MyHeaderTitleView.MoreclickListenser() {
                 @Override
                 public void setmoreclicklistenser() {
                 }
@@ -310,7 +309,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
     //中间的四个type
     public class Type4CategoryHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.rv_homepageradapter_artist)
+        @Bind(R.id.rv_home_artist)
         RecyclerView rvtype;
 
         public Type4CategoryHolder(View view) {
@@ -320,7 +319,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     }
 
     public class Type3CenterHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.rv_homepageradapter_artist)
+        @Bind(R.id.rv_home_artist)
         RecyclerView rvtype;
 
 

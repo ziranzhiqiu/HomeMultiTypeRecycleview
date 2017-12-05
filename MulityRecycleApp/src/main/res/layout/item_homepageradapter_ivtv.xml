@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.json.mulityrecycle.weidget.AsImageTextView
-        android:id="@+id/asivtv_homepageradapter"
+    <com.json.mulityrecycle.weidget.MyPicTextView
+        android:id="@+id/pictv_home_adapter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.json.mulityrecycle.weidget.AsImageTextView>>
+        android:layout_height="wrap_content" />
 </LinearLayout>

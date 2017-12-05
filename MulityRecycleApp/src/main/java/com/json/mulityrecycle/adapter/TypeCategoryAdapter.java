@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.json.mulityrecycle.R;
 import com.json.mulityrecycle.bean.HomeCategory;
-import com.json.mulityrecycle.weidget.AsImageTextView;
+import com.json.mulityrecycle.weidget.MyPicTextView;
 
 import java.util.List;
 
@@ -42,8 +42,8 @@ public class TypeCategoryAdapter extends RecyclerView.Adapter<TypeCategoryAdapte
     @Override
     public void onBindViewHolder(TypetypeHolder holder, int position) {
         HomeCategory homeCategory = mHomeCategory.get(position);
-        holder.asivtvHomepageradapter.setTvImagetext(homeCategory.getTypename());
-        holder.asivtvHomepageradapter.setIvImagetext(homeCategory.getImageid());
+        holder.myPicTextView.setTvImagetext(homeCategory.getTypename());
+        holder.myPicTextView.setIvImagetext(homeCategory.getImageid());
     }
 
     @Override
@@ -53,8 +53,8 @@ public class TypeCategoryAdapter extends RecyclerView.Adapter<TypeCategoryAdapte
 
     //中间的四个type
     public class TypetypeHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.asivtv_homepageradapter)
-        AsImageTextView asivtvHomepageradapter;
+        @Bind(R.id.pictv_home_adapter)
+        MyPicTextView myPicTextView;
 
         public TypetypeHolder(View view) {
             super(view);
